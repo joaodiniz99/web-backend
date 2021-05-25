@@ -1,0 +1,270 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Ficha 7 API",
+        "description": "Ficha 7 API Information",
+        "contact": {
+            "name": "TPSI-DWB"
+        },
+        "servers": [
+            "http://localhost:3000"
+        ]
+    },
+    "paths": {
+        "/persons": {
+            "get": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Gets a list of persons",
+                "description": "Returns a list of persons",
+                "operationId": "getPersons",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Successfull operation",
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Create person",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createPerson",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created person object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Successfully Created"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Deletes a person by id",
+                "description": "Deletes a single person by id",
+                "operationId": "deletePersonByBody",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "id",
+                        "description": "Person's id",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Successfully deleted"
+                    }
+                }
+            }
+        },
+        "/persons/{id}": {
+            "get": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Get person by id",
+                "description": "Get person by ID.",
+                "operationId": "getPersonById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be fetched. Use id 1 for testing.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull operation",
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid id supplied"
+                    },
+                    "404": {
+                        "description": "Id not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Updates a person",
+                "description": "Returns a list of updated person",
+                "operationId": "updatePerson",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Person's id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Person's body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated",
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid id supplied"
+                    },
+                    "404": {
+                        "description": "Id not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Deletes a person by id",
+                "description": "Deletes a single person by id",
+                "operationId": "deletePersonById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be deleted.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted"
+                    },
+                    "400": {
+                        "description": "Invalid id supplied"
+                    },
+                    "404": {
+                        "description": "Id not found"
+                    }
+                }
+            }
+        },
+        "/persons/{age}/{profession}": {
+            "get": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Get a list of persons by age and profession",
+                "description": "Get a list of persons by AGE and PROFESSION.",
+                "operationId": "getPersonsByAgeAndProfession",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "age",
+                        "in": "path",
+                        "description": "The age that needs to be fetched.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profession",
+                        "in": "path",
+                        "description": "The profession that needs to be fetched.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull operation",
+                        "schema": {
+                            "$ref": "#/definitions/Person"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid age or profession supplied"
+                    },
+                    "404": {
+                        "description": "Age or profession not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Person": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "x-primary-key": true
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "profession": {
+                    "type": "string"
+                },
+                "age": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        }
+    }
+}
