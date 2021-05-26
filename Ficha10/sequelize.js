@@ -2,9 +2,9 @@ const Sequelize = require("sequelize");
 const PersonModel = require("./models/Person");
 
 // Criação da ligação à BD
-const sequelize = new Sequelize('ficha10', 'root', 'rootPassword321', {
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     dialect: 'mysql',
-    host: 'localhost',
+    host: process.env.DB_HOST,
     pool: {
         max: 10,
         min: 0,
